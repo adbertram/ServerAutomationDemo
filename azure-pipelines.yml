@@ -8,6 +8,7 @@ variables:
 - group: ServerAutomationDemo
 
 steps:
+- pwsh: Install-Module -Name Pester -Force -Confirm:$false -SkipPublisherCheck
 - task: Pester@8
   inputs:
     scriptFolder: '$(System.DefaultWorkingDirectory\server.template.tests.ps1'
