@@ -9,10 +9,7 @@ variables:
 
 steps:
 - pwsh: Install-Module -Name Pester -Force -SkipPublisherCheck
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: gmo pester -list
+ 
 #- task: Pester@8
 #  inputs:
 #   scriptFolder: '$(System.DefaultWorkingDirectory\server.template.tests.ps1'
