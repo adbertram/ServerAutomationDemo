@@ -5,4 +5,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- pwsh: get-childitem $(Agent.BuildDirectory)
+- task: Pester@8
+  inputs:
+    scriptFolder: '$(System.DefaultWorkingDirectory\server.template.tests.ps1'
+    resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+    run32Bit: False
