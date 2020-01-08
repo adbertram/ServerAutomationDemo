@@ -14,12 +14,6 @@
                 "description": "Password for the Virtual Machine."
             }
         },
-        "dnsLabelPrefix": {
-            "type": "string",
-            "metadata": {
-                "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
-            }
-        },
         "windowsOSVersion": {
             "type": "string",
             "defaultValue": "2019-Datacenter",
@@ -59,6 +53,8 @@
     },
     "variables": {
         "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
+        "provisioningScriptName": "New-ServerProvisioning.ps1",
+        "vmScriptsContainerName": "serverscripts",
         "nicName": "myVMNic",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
@@ -87,10 +83,7 @@
             "name": "[variables('publicIPAddressName')]",
             "location": "[parameters('location')]",
             "properties": {
-                "publicIPAllocationMethod": "Dynamic",
-                "dnsSettings": {
-                    "domainNameLabel": "[parameters('dnsLabelPrefix')]"
-                }
+                "publicIPAllocationMethod": "Dynamic"
             }
         },
         {
@@ -197,14 +190,7 @@
                     },
                     "osDisk": {
                         "createOption": "FromImage"
-                    },
-                    "dataDisks": [
-                        {
-                            "diskSizeGB": 1023,
-                            "lun": 0,
-                            "createOption": "Empty"
-                        }
-                    ]
+                    }
                 },
                 "networkProfile": {
                     "networkInterfaces": [
@@ -212,19 +198,13 @@
                             "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
                         }
                     ]
-                },
-                "diagnosticsProfile": {
-                    "bootDiagnostics": {
-                        "enabled": true,
-                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))).primaryEndpoints.blob]"
-                    }
                 }
             },
             "resources": [
                 {
                     "name": "[variables('provisioningScriptName')]",
                     "type": "extensions",
-                    "location": "[variables('location')]",
+                    "location": "[parameters('location')]",
                     "apiVersion": "2015-06-15",
                     "dependsOn": [
                         "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
@@ -238,7 +218,7 @@
                         "typeHandlerVersion": "1.4",
                         "autoUpgradeMinorVersion": true,
                         "settings": {
-                            "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File Set-AzureVmConfigurationDefaults.ps1",
+                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',variables('provisioningScriptName'))]",
                             "fileUris": [
                                 "[concat('https://',variables('storageAccountName'),'.blob.core.windows.net/',variables('vmScriptsContainerName'),'/',variables('provisioningScriptName'))]"
                             ]
