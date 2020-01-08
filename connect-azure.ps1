@@ -5,6 +5,7 @@ param (
     [string]$ServicePrincipalPassword
 )
 
+
 Install-Module -Name Az.Accounts, Az.Resources -Force -SkipPublisherCheck
 
 $azureAdAppId = '21f9ea0e-b668-4cc2-93e0-6f6fd338d57f'
