@@ -1,6 +1,6 @@
 #requires -Module Az.Accounts,Az.Resources
 
-$templatePath = Join-Path -Path "$(Agent.BuildDirectory)" -ChildPath 'server.json'
+$templatePath = Join-Path -Path "$(System.DefaultWorkingDirectory)" -ChildPath 'server.json'
 $resourceGroupName = 'ServerProvisionTesting'
 
 describe 'Template validation' {
