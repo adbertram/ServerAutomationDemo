@@ -8,9 +8,8 @@ variables:
 - group: ServerAutomationDemo
 
 steps:
-  - pwsh: write-host $(ServerAutomationDemo-AppPw)
-#- task: Pester@8
-#  inputs:
-#    scriptFolder: '$(System.DefaultWorkingDirectory\server.template.tests.ps1'
-#    resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
-#    run32Bit: False
+- task: Pester@8
+  inputs:
+    scriptFolder: '$(System.DefaultWorkingDirectory\server.template.tests.ps1'
+    resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+    run32Bit: False
