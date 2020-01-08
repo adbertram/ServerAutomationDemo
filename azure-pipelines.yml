@@ -5,4 +5,4 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- pwsh: get-childitem $(Agent.BuildDirectory)
+- pwsh: get-childitem
