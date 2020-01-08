@@ -11,7 +11,7 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'connect-azure.ps1'
-    arguments: '-ServicePrincipalPassword $(ServerAutomationDemo-AppPw)'
+    arguments: '-ServicePrincipalPassword "$(ServerAutomationDemo-AppPw)"'
 - task: Pester@0
   inputs:
     scriptFolder: '$(System.DefaultWorkingDirectory)\server.template.tests.ps1'
