@@ -11,9 +11,10 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'connect-azure.ps1'
+    arguments: '-ServicePrincipalPassword=(ServerAutomationDemo-AppPw)'
 - task: Pester@0
   inputs:
-    scriptFolder: '@{Path=''(System.DefaultWorkingDirectory)\server.template.tests.ps1''; Parameters=@{ServicePrincipalPassword=''(ServerAutomationDemo-AppPw)''}}'
+    scriptFolder: '(System.DefaultWorkingDirectory)\server.template.tests.ps1'
     resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
     usePSCore: true
     run32Bit: False
