@@ -14,12 +14,12 @@ steps:
     arguments: '-ServicePrincipalPassword "$(ServerAutomationDemo-AppPw)"'
 - task: Pester@0
   inputs:
-    scriptFolder: '$(System.DefaultWorkingDirectory)\server.template.tests.ps1'
-    resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+    scriptFolder: '$(System.DefaultWorkingDirectory)/server.template.tests.ps1'
+    resultsFile: '$(System.DefaultWorkingDirectory)/Test-Pester.XML'
     usePSCore: true
     run32Bit: False
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'NUnit'
-    testResultsFiles: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/Test-Pester.XML'
     failTaskOnFailedTests: true
