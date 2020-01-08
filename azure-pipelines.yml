@@ -5,10 +5,4 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      # Write your PowerShell commands here.
-      
-      ls $(Agent.BuildDirectory)
+- pwsh: get-childitem $(Agent.BuildDirectory)
