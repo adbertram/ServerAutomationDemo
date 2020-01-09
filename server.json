@@ -52,30 +52,17 @@
         }
     },
     "variables": {
-        "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
         "nicName": "myVMNic",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
         "subnetPrefix": "10.0.0.0/24",
         "publicIPAddressName": "[concat(parameters('vmName'),uniquestring(resourceGroup().id))]",
-        "publicIpDnsLabelPrefix": "[toLower(parameters('vmName'))]",
+        "publicIpDnsLabelPrefix": "[toLower(concat(parameters('vmName'),'-',uniquestring(resourceGroup().id)))]",
         "virtualNetworkName": "MyVNET",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
         "networkSecurityGroupName": "default-NSG"
     },
     "resources": [
-        {
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2018-11-01",
-            "name": "[variables('storageAccountName')]",
-            "location": "[parameters('location')]",
-            "sku": {
-                "name": "Standard_LRS"
-            },
-            "kind": "Storage",
-            "properties": {
-            }
-        },
         {
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2018-11-01",
