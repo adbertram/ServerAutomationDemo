@@ -33,5 +33,5 @@ steps:
     location: 'East US'
     templateLocation: 'Linked artifact'
     csmFile: 'server.json'
-    csmParametersFile: 'parameters.json'
+    csmParametersFile: 'server.parameters.json'
     deploymentMode: 'Incremental'
