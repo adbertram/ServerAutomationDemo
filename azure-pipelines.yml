@@ -13,10 +13,6 @@ steps:
     filePath: 'connect-azure.ps1'
     arguments: '-ServicePrincipalPassword "$(ServerAutomationDemo-AppPw)"'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'New-AzResourceGroup -Name ServerProvisionTesting -Location eastus -Force'
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
@@ -40,8 +36,3 @@ steps:
     testResultsFormat: 'NUnit'
     testResultsFiles: '$(System.DefaultWorkingDirectory)/Test-Pester.XML'
     failTaskOnFailedTests: true
-
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'Get-AzResourceGroup -Name ServerProvisionTesting | Remove-AzResourceGroup'
