@@ -1,13 +1,17 @@
-#requires -Module Az.Accounts,Az.Resources
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory)]
+    [ValidateNotNullOrEmpty()]
+    [string]$ResourceGroupName
+)
 
-#$templatePath = Join-Path -Path $env:System_DefaultWorkingDirectory -ChildPath 'server.json'
-$resourceGroupName = 'ServerProvisionTesting'
+#requires -Module Az.Accounts,Az.Resources
 
 describe 'Template validation' {
     it 'template passes validation check' {
         $parameters = @{
             TemplateFile      = 'server.json'
-            ResourceGroupName = $resourceGroupName
+            ResourceGroupName = $ResourceGroupName
             adminUsername     = 'adam'
             adminPassword     = (ConvertTo-SecureString -String 'testing' -AsPlainText -Force)
             vmName            = 'TESTING'
