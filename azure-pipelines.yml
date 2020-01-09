@@ -36,4 +36,3 @@ steps:
     testResultsFormat: 'NUnit'
     testResultsFiles: '$(System.DefaultWorkingDirectory)/Test-Pester.XML'
     failTaskOnFailedTests: true
-
