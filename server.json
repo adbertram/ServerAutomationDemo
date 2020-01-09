@@ -53,8 +53,6 @@
     },
     "variables": {
         "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
-        "provisioningScriptName": "New-ServerProvisioning.ps1",
-        "vmScriptsContainerName": "serverscripts",
         "nicName": "myVMNic",
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
@@ -199,33 +197,7 @@
                         }
                     ]
                 }
-            },
-            "resources": [
-                {
-                    "name": "[variables('provisioningScriptName')]",
-                    "type": "extensions",
-                    "location": "[parameters('location')]",
-                    "apiVersion": "2015-06-15",
-                    "dependsOn": [
-                        "[concat('Microsoft.Compute/virtualMachines/', parameters('vmName'))]"
-                    ],
-                    "tags": {
-                        "displayName": "[variables('provisioningScriptName')]"
-                    },
-                    "properties": {
-                        "publisher": "Microsoft.Compute",
-                        "type": "CustomScriptExtension",
-                        "typeHandlerVersion": "1.4",
-                        "autoUpgradeMinorVersion": true,
-                        "settings": {
-                            "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ',variables('provisioningScriptName'))]",
-                            "fileUris": [
-                                "[concat('https://',variables('storageAccountName'),'.blob.core.windows.net/',variables('vmScriptsContainerName'),'/',variables('provisioningScriptName'))]"
-                            ]
-                        }
-                    }
-                }
-            ]
+            }
         }
     ],
     "outputs": {
