@@ -1,0 +1,20 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "value": "adam"
+        },
+        "adminPassword": {
+            "reference": {
+                "keyVault": {
+                    "id": "/subscriptions/1427e7fb-a488-4ec5-be44-30ac10ca2e95/resourceGroups/SharedKeyVault/providers/Microsoft.KeyVault/vaults/adamtheautomator"
+                },
+                "secretName": "StandardVmAdminPassword"
+            }
+        },
+        "vmName": {
+            "value": "NEWVM"
+        }
+    }
+}
