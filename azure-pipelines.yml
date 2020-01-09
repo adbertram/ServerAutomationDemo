@@ -12,6 +12,23 @@ steps:
   inputs:
     filePath: 'connect-azure.ps1'
     arguments: '-ServicePrincipalPassword "$(ServerAutomationDemo-AppPw)"'
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'New-AzResourceGroup -Name ServerProvisionTesting -Location eastus -Force'
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'Adam the Automator (1427e7fb-a488-4ec5-be44-30ac10ca2e95)'
+    subscriptionId: '1427e7fb-a488-4ec5-be44-30ac10ca2e95'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'ServerProvisionTesting'
+    location: 'East US'
+    templateLocation: 'Linked artifact'
+    csmFile: 'server.json'
+    csmParametersFile: 'parameters.json'
+    deploymentMode: 'Incremental'
 - task: Pester@0
   inputs:
     scriptFolder: '$(System.DefaultWorkingDirectory)/server.template.tests.ps1'
@@ -23,3 +40,8 @@ steps:
     testResultsFormat: 'NUnit'
     testResultsFiles: '$(System.DefaultWorkingDirectory)/Test-Pester.XML'
     failTaskOnFailedTests: true
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'Get-AzResourceGroup -Name ServerProvisionTesting | Remove-AzResourceGroup'
