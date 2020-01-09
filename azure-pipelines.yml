@@ -15,13 +15,13 @@ steps:
 - task: Pester@0
   inputs:
     scriptFolder: '$(System.DefaultWorkingDirectory)/server.template.tests.ps1'
-    resultsFile: '$(System.DefaultWorkingDirectory)/Test-Pester.XML'
+    resultsFile: '$(System.DefaultWorkingDirectory)/server.template.tests.XML'
     usePSCore: true
     run32Bit: False
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'NUnit'
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/Test-Pester.XML'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/server.template.tests.XML'
     failTaskOnFailedTests: true
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -35,3 +35,22 @@ steps:
     csmFile: 'server.json'
     csmParametersFile: 'server.parameters.json'
     deploymentMode: 'Incremental'
+    deploymentOutputs: 'hostname'
+- task: Pester@0
+  inputs:
+    scriptFolder: '$(System.DefaultWorkingDirectory)/server.infrastructure.tests.ps1'
+    resultsFile: '$(System.DefaultWorkingDirectory)/server.infrastructure.tests.XML'
+    usePSCore: true
+    run32Bit: False
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/server.infrastructure.tests.XML'
+    failTaskOnFailedTests: true
+- task: Pester@0
+  inputs:
+    scriptFolder: '@{Path=''$(System.DefaultWorkingDirectory)/server.infrastructure.tests.ps1''; Parameters=@{HostName=''111''}}'
+    resultsFile: '$(System.DefaultWorkingDirectory)\Test-Pester.XML'
+    usePSCore: False
+    run32Bit: False
+    
