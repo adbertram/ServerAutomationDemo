@@ -57,8 +57,8 @@
         "addressPrefix": "10.0.0.0/16",
         "subnetName": "Subnet",
         "subnetPrefix": "10.0.0.0/24",
-        "publicIPAddressName": "[parameters('vmName')]",
-        "publicIpDnsLabelPrefix": "[parameters('vmName')]",
+        "publicIPAddressName": "[concat(parameters('vmName'),uniquestring(resourceGroup().id))]",
+        "publicIpDnsLabelPrefix": "[toLower(parameters('vmName'))]",
         "virtualNetworkName": "MyVNET",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
         "networkSecurityGroupName": "default-NSG"
@@ -155,7 +155,7 @@
                         "properties": {
                             "privateIPAllocationMethod": "Dynamic",
                             "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses/',variables('publicIPAddressName'))]"
                             },
                             "subnet": {
                                 "id": "[variables('subnetRef')]"

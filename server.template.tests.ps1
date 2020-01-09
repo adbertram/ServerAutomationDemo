@@ -12,6 +12,6 @@ describe 'Template validation' {
             adminPassword     = (ConvertTo-SecureString -String 'testing' -AsPlainText -Force)
             vmName            = 'TESTING'
         }
-        Test-AzResourceGroupDeployment @parameters | should -Benullorempty
+        (Test-AzResourceGroupDeployment @parameters).Details | should -Benullorempty
     }
 }
