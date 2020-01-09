@@ -15,3 +15,5 @@ describe 'Template validation' {
         (Test-AzResourceGroupDeployment @parameters).Details | should -Benullorempty
     }
 }
+
+##
