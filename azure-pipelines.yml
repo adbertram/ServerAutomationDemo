@@ -18,11 +18,6 @@ steps:
     resultsFile: '$(System.DefaultWorkingDirectory)/server.template.tests.XML'
     usePSCore: true
     run32Bit: False
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'NUnit'
-    testResultsFiles: '$(System.DefaultWorkingDirectory)/server.template.tests.XML'
-    failTaskOnFailedTests: true
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
@@ -46,5 +41,11 @@ steps:
   inputs:
     testResultsFormat: 'NUnit'
     testResultsFiles: '$(System.DefaultWorkingDirectory)/server.infrastructure.tests.XML'
+    failTaskOnFailedTests: true
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '$(System.DefaultWorkingDirectory)/server.template.tests.XML'
     failTaskOnFailedTests: true
     
