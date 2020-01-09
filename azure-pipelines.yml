@@ -20,7 +20,7 @@ steps:
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
     deploymentScope: 'Resource Group'
-    azureResourceManagerConnection: 'Adam the Automator (1427e7fb-a488-4ec5-be44-30ac10ca2e95)'
+    azureResourceManagerConnection: 'AzureResourceManager'
     subscriptionId: '1427e7fb-a488-4ec5-be44-30ac10ca2e95'
     action: 'Create Or Update Resource Group'
     resourceGroupName: 'ServerProvisionTesting'
