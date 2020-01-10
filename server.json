@@ -192,6 +192,18 @@
             }
         },
         {
+            "type": "Microsoft.Automation/automationAccounts",
+            "name": "[variables('automationAccountName')]",
+            "apiversion": "2018-01-15",
+            "location": "[parameters('location')]",
+            "comments": "Automation account for DSC",
+            "properties": {
+                "sku": {
+                    "name": "OMS"
+                }
+            }
+        },
+        {
             "type": "Microsoft.Compute/virtualMachines/extensions",
             "name": "[concat(parameters('VMName'),'/OnboardToDSC')]",
             "apiVersion": "2017-12-01",
