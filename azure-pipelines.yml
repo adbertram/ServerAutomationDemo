@@ -1,19 +1,66 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
+branches:
+include:
 - master
+paths:
+include:
+- server.json
+- server.parameters.json
 
 pool:
-  vmImage: 'ubuntu-latest'
+vmImage: "ubuntu-latest"
+
+variables:
+- group: ServerAutomationDemo
+- name: azure_resource_group_name
+value: "ServerProvisionTesting-$(Build.BuildId)"
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: PowerShell@2
+inputs:
+filePath: "connect-azure.ps1"
+arguments: '-ServicePrincipalPassword "$(ServerAutomationDemo-AppPw)"'
+- task: PowerShell@2
+inputs:
+targetType: "inline"
+script: New-AzResourceGroup -Name $(azure_resource_group_name) -Location eastus -Force
+- task: Pester@0
+inputs:
+scriptFolder: "@{Path='$(System.DefaultWorkingDirectory)/server.template.tests.ps1'; Parameters=@{ResourceGroupName='$(azure_resource_group_name)'}}"
+resultsFile: "$(System.DefaultWorkingDirectory)/server.template.tests.XML"
+usePSCore: true
+run32Bit: False
+- task: AzureResourceManagerTemplateDeployment@3
+inputs:
+deploymentScope: "Resource Group"
+azureResourceManagerConnection: "ARM Deployment"
+subscriptionId: "1427e7fb-a488-4ec5-be44-30ac10ca2e95"
+action: "Create Or Update Resource Group"
+resourceGroupName: $(azure_resource_group_name)
+location: "East US"
+templateLocation: "Linked artifact"
+csmFile: "server.json"
+csmParametersFile: "server.parameters.json"
+deploymentMode: "Incremental"
+deploymentOutputs: "arm_output"
+- task: Pester@0
+inputs:
+scriptFolder: "@{Path='$(System.DefaultWorkingDirectory)/server.infrastructure.tests.ps1'; Parameters=@{ArmDeploymentJsonOutput='$(arm_output)'}}"
+resultsFile: "$(System.DefaultWorkingDirectory)/server.infrastructure.tests.XML"
+usePSCore: true
+run32Bit: False
+- task: PowerShell@2
+inputs:
+targetType: "inline"
+script: Get-AzResourceGroup -Name $(azure_resource_group_name) | Remove-AzResourceGroup -Force
+- task: PublishTestResults@2
+inputs:
+testResultsFormat: "NUnit"
+testResultsFiles: "$(System.DefaultWorkingDirectory)/server.infrastructure.tests.XML"
+failTaskOnFailedTests: true
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: PublishTestResults@2
+inputs:
+testResultsFormat: "NUnit"
+testResultsFiles: "$(System.DefaultWorkingDirectory)/server.template.tests.XML"
+failTaskOnFailedTests: true
