@@ -14,12 +14,18 @@ variables:
   - group: ServerAutomationDemo
   - name: azure_resource_group_name
     value: "ServerProvisionTesting-$(Build.BuildId)"
+  - name: subscription_id
+    value: "1427e7fb-a488-4ec5-be44-30ac10ca2e95"
+  - name: application_id
+    value: "REMEMBERTOFILLTHISIN"
+  - name: tenant_id
+    value: "11376bd0-c80f-4e99-b86f-05d17b73518d"
 
 steps:
   - task: PowerShell@2
     inputs:
       filePath: "connect-azure.ps1"
-      arguments: '-ServicePrincipalPassword "$(ServerAutomationDemo-AppPw)"'
+      arguments: '-ServicePrincipalPassword "$(ServerAutomationDemo-AppPw)" -SubscriptionId $(subscription_id) -ApplicationId $(application_id) -TenantId $($tenant_id)'
   - task: PowerShell@2
     inputs:
       targetType: "inline"
