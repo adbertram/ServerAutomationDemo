@@ -17,7 +17,7 @@ variables:
   - name: subscription_id
     value: "1427e7fb-a488-4ec5-be44-30ac10ca2e95"
   - name: application_id
-    value: "a86e3ded-15e4-44cf-8c4d-5cebea7746b7"
+    value: "XXXXXXXXXXXXXXXXXXXXXXXXXX"
   - name: tenant_id
     value: "11376bd0-c80f-4e99-b86f-05d17b73518d"
 
