@@ -15,11 +15,11 @@ variables:
   - name: azure_resource_group_name
     value: "ServerProvisionTesting-$(Build.BuildId)"
   - name: subscription_id
-    value: "1427e7fb-a488-4ec5-be44-30ac10ca2e95"
+    value: "XXXXXXXXXXXXXXXXXXXXXXXXXX"
   - name: application_id
     value: "XXXXXXXXXXXXXXXXXXXXXXXXXX"
   - name: tenant_id
-    value: "11376bd0-c80f-4e99-b86f-05d17b73518d"
+    value: "XXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 steps:
   - task: PowerShell@2
@@ -40,7 +40,7 @@ steps:
     inputs:
       deploymentScope: "Resource Group"
       azureResourceManagerConnection: "ARM"
-      subscriptionId: "1427e7fb-a488-4ec5-be44-30ac10ca2e95"
+      subscriptionId: "$(subscription_id)"
       action: "Create Or Update Resource Group"
       resourceGroupName: $(azure_resource_group_name)
       location: "East US"
