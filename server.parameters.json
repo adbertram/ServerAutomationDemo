@@ -8,7 +8,7 @@
         "adminPassword": {
             "reference": {
                 "keyVault": {
-                    "id": "/subscriptions/1427e7fb-a488-4ec5-be44-30ac10ca2e95/resourceGroups/SharedKeyVault/providers/Microsoft.KeyVault/vaults/adamtheautomator"
+                    "id": "/subscriptions/<your_subscription_id>/resourceGroups/SharedKeyVault/providers/Microsoft.KeyVault/vaults/<your keyvault name>"
                 },
                 "secretName": "StandardVmAdminPassword"
             }
