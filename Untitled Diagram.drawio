@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-01-16T19:21:29.465Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36" etag="5kDLMX8mTzCCC6LC_90S" version="14.2.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-16T19:23:14.174Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36" etag="ab-dhwMouAcsvAEZOjMz" version="14.2.3" type="github">
   <diagram id="Zt7Xw9XqJhSenWX1RiCg" name="Page-1">
-    <mxGraphModel dx="1608" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2120" dy="884" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -138,9 +138,6 @@
         </mxCell>
         <mxCell id="mggX9JK2n9Wl0W4keAl1-79" value="" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/networking/Virtual_Networks.svg;dashed=1;" vertex="1" parent="1">
           <mxGeometry x="685" y="80" width="35" height="20.9" as="geometry" />
-        </mxCell>
-        <mxCell id="mggX9JK2n9Wl0W4keAl1-81" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.azure_subscription;shadow=0;dashed=1;dashPattern=1 2;fontFamily=Tahoma;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="10" y="620" width="50" height="35" as="geometry" />
         </mxCell>
         <mxCell id="mggX9JK2n9Wl0W4keAl1-82" value="&lt;font face=&quot;Tahoma&quot;&gt;&lt;span style=&quot;font-size: 11px&quot;&gt;Prod &lt;br&gt;Subscription&lt;br&gt;&lt;br&gt;&lt;/span&gt;&lt;/font&gt;" style="aspect=fixed;html=1;points=[];align=center;image;fontSize=12;image=img/lib/azure2/general/Subscriptions.svg;shadow=0;dashed=1;dashPattern=1 2;strokeColor=#FF8000;gradientColor=#ffffff;" vertex="1" parent="1">
           <mxGeometry x="820" y="-106.82" width="44" height="71" as="geometry" />
